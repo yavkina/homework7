@@ -1,56 +1,41 @@
-let countries = [
-        {   country: 'Germany',
-            capital: 'Berlin',
-            population: 83,
-            area: 357.4,
-        },
-        {
-            country: 'Belarus',
-            capital: 'Minsk',
-            population: 9.4,
-            area: 207.6,
-        },
-        {
-            country: 'Poland',
-            capital: 'Warsaw',
-            population: 37.9,
-            area: 312.6,
-        },
-        {
-            country: 'France',
-            capital: 'Paris',
-            population: 67.8,
-            area: 643.8,
-        },
-        {
-            country: 'Netherlands',
-            capital: 'Amsterdam',
-            population: 17.4,
-            area: 41.5,
-        },
-        {
-            country: 'Spain',
-            capital: 'Madrid',
-            population: 44.3,
-            area: 505.9,
-        },
-        {
-            country: 'Belgium',
-            capital: 'Brussels',
-            population: 11.4,
-            area: 30.5,
-        },
-    ];
+function State (name, capital, population, area) {
+    this.name = name;
+    this.capital = capital;
+    this.population = population;
+    this.area = area
+}
 
-let capitalLongLand = countries.find(item => item.capital === 'Minsk');
+const str =
+    'Германия, Берлин, 83млн, 357.4тыс.кв.км;' +
+    ' Беларусь, Минск, 9.4млн, 207.6тыс.кв.км;' +
+    ' Польша, Варшава, 37.9млн, 312.6тыс.кв.км;' +
+    ' Франция, Париж, 67.8млн, 643.8тыс.кв.км;' +
+    ' Нидерланды, Амстердам, 17.4млн, 41.5тыс.кв.км;' +
+    ' Испания, Мадрид, 44.3млн, 505.9тыс.кв.км;' +
+    ' Бельгия, Брюссель, 11.4млн, 30.5тыс.кв.км';
+
+
+let arr = str.split (';');
+
+arr = arr.map((countryStr) => {
+        const contryArr = countryStr.split(',')
+        return new State(
+            contryArr[0].trim(),
+            contryArr[1].trim(),
+            parseFloat(contryArr[2]),
+            parseFloat(contryArr[3]),
+        )
+    });
+
+let capitalLongLand = arr.find(item => item.capital === 'Минск');
 
 let initialValue = 0;
 
-let resultPopulation = countries.reduce((acc, name) => 
+let resultPopulation = arr.reduce((acc, name) => 
         acc + name.population, initialValue
     )
         
-let resultArea = countries.reduce((acc, name) => 
+let resultArea = arr.reduce((acc, name) => 
         acc + name.area, initialValue
     )
 
